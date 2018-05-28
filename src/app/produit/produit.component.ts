@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import {ProduitService} from './produit.service';
+import {ProduitMockService} from './produit.mock.service';
 import {Produit} from '../shared/produit';
 
 @Component({
@@ -20,7 +21,7 @@ export class ProduitComponent implements OnInit{
 
   selectedProduit: Produit;
 
-  constructor(private produitService: ProduitService, private fb: FormBuilder, private route: ActivatedRoute){
+  constructor(private produitService: ProduitMockService, private fb: FormBuilder, private route: ActivatedRoute){
     this.createForm();
   }
 
