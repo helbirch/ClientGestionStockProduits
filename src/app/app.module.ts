@@ -19,6 +19,7 @@ import { HomeComponent } from './home/home.component';
 import { AppService } from './app.service';
 import { XhrInterceptor } from './xhr.interceptor';
 import { UserComponent } from './user/user.component';
+import { CrudComponent } from './shared/crud/crud.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { UserComponent } from './user/user.component';
     DashboardComponent,
     LoginComponent,
     HomeComponent,
-    UserComponent
+    UserComponent,
+    CrudComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule

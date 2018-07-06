@@ -4,27 +4,28 @@ import { Observable } from 'rxjs/Observable';
 
 import { API_URLS} from '../config/api.url.config';
 import { Produit } from '../shared/produit';
+import { CrudService } from '../shared/crud.service';
 
 @Injectable()
-export class ProduitService{
+export class ProduitService implements CrudService<Produit, number>{
 
   constructor(private http: HttpClient){
 
   }
 
-  getProduits(): Observable<any>{
+  getAll(): Observable<any>{
     return this.http.get(API_URLS.PRODUITS_URL);
   }
 
-  addProduit(produit:Produit): Observable<any>{
+  add(produit:Produit): Observable<any>{
     return this.http.post(API_URLS.PRODUITS_URL, produit);
   }
 
-  updateProduit(produit: Produit): Observable<any>{
+  update(produit: Produit): Observable<any>{
     return this.http.put(API_URLS.PRODUITS_URL, produit);
   }
 
-  deleteProduit(id:number): Observable<any>{
+  delete(id:number): Observable<any>{
     return this.http.delete(API_URLS.PRODUITS_URL + `/${id}`);
   }
 
