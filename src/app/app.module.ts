@@ -20,7 +20,6 @@ import { AppService } from './app.service';
 import { XhrInterceptor } from './xhr.interceptor';
 import { UserComponent } from './user/user.component';
 import { CrudComponent } from './shared/crud/crud.component';
-import { ItemComponent } from './shared/crud/item/item.component';
 
 @NgModule({
   declarations: [
@@ -33,8 +32,7 @@ import { ItemComponent } from './shared/crud/item/item.component';
     LoginComponent,
     HomeComponent,
     UserComponent,
-    CrudComponent,
-    ItemComponent
+    CrudComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule

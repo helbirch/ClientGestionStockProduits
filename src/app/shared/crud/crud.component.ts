@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 
 import { CrudService } from './crud.service';
+import { Column } from '../column.model';
 
 @Component({
   selector: 'app-crud',
@@ -24,6 +25,9 @@ export class CrudComponent implements OnInit {
 
   @Input()
   service: CrudService;
+
+  @Input()
+  dataDesc: Column[];
 
   crudForm: FormGroup;
 
