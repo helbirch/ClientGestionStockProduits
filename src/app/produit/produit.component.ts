@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-
+import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 
 import {ProduitMockService} from './produit.mock.service';
@@ -14,13 +14,17 @@ export class ProduitComponent implements OnInit{
 
     produits: Produit[];
 
-    constructor(private route: ActivatedRoute){
+    produitForm: FormGroup;
+
+    initProduit = new Produit();
+
+    constructor(private produitService: ProduitMockService, private route: ActivatedRoute, private fb: FormBuilder){
 
     }
 
     ngOnInit(){
       this.produits = this.route.snapshot.data.produits;
-      this.crudForm = this.fb.group({
+      this.produitForm = this.fb.group({
         ref: ['', Validators.required],
         quantite: '',
         prixUnitaire: ''

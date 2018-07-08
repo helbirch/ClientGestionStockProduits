@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 
+import { CrudService } from './crud.service';
+
 @Component({
   selector: 'app-crud',
   templateUrl: './crud.component.html',
@@ -9,13 +11,19 @@ import { FormGroup, FormBuilder, Validators} from '@angular/forms';
 export class CrudComponent implements OnInit {
 
   @Input()
-  data: [];
-
-  @Input()
   title: string;
 
   @Input()
+  initItem: any;
+
+  @Input()
   initCrudForm: FormGroup;
+
+  @Input()
+  data: any;
+
+  @Input()
+  service: CrudService;
 
   crudForm: FormGroup;
 
@@ -23,63 +31,63 @@ export class CrudComponent implements OnInit {
 
   selectedItem: any;
 
-  constructor(private produitService: ProduitMockService, private fb: FormBuilder){
+  keys = [];
+
+  constructor(private fb: FormBuilder){
     this.createForm();
   }
 
   ngOnInit(){
-
-    this.initProduit();
-
+    this.initData();
   }
 
   createForm(){
     if(this.initCrudForm){
       this.crudForm = this.initCrudForm;
     } else {
-      this.crudForm = this.fb.group();
+      this.crudForm = this.fb.group({});
     }
   }
-  
-  loadProduits(){
-    this.produitService.getAll().subscribe(
+
+  loadData(){
+    this.service.getAll().subscribe(
       data => {this.data = data},
       error => { console.log('An error was occured.')},
-      () => { console.log('loading produits was done.')}
+      () => { console.log('loading data was done.')}
     );
   }
 
-  addProduit(){
-    const p = this.produitForm.value;
-    this.produitService.add(p).subscribe(
+  add(){
+    const p = this.crudForm.value;
+    this.service.add(p).subscribe(
       res => {
-        this.initProduit();
-        this.loadProduits();
+        this.initData();
+        this.loadData();
       }
     );
   }
 
-  updateProduit(){
-    this.produitService.update(this.selectedProduit)
+  update(){
+    this.service.update(this.selectedItem)
     .subscribe(
       res => {
-        this.initProduit();
-        this.loadProduits();
+        this.initData();
+        this.loadData();
       }
     );
   }
 
-  initProduit(){
-    this.selectedProduit = new Produit();
+  initData(){
+    this.selectedItem = this.initItem;
     this.createForm();
   }
 
-  deleteProduit(){
-    this.produitService.delete(this.selectedProduit.id).
+  delete(){
+    this.service.delete(this.selectedItem.id).
     subscribe(
       res =>{
-        this.selectedProduit = new Produit();
-        this.loadProduits();
+        this.selectedItem = this.initItem;
+        this.loadData();
       }
     );
   }

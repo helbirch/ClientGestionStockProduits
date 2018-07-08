@@ -1,4 +1,7 @@
-<app-crud [data]="produits"
-[title]="Produits"
+<app-crud
+[title]="'Liste de produits'"
+[initItem]="initProduit"
 [initCrudForm]="produitForm"
+[data]="produits"
+[service]="produitService"
 ></app-crud>

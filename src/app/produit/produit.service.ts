@@ -4,10 +4,10 @@ import { Observable } from 'rxjs/Observable';
 
 import { API_URLS} from '../config/api.url.config';
 import { Produit } from '../shared/produit';
-import { CrudService } from '../shared/crud.service';
+import { CrudService } from '../shared/crud/crud.service';
 
 @Injectable()
-export class ProduitService implements CrudService<Produit, number>{
+export class ProduitService implements CrudService{
 
   constructor(private http: HttpClient){
 

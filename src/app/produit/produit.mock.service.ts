@@ -3,10 +3,10 @@ import { Observable } from 'rxjs/Observable';
 import { of } from "rxjs/observable/of";
 
 import {Produit} from '../shared/produit';
-import { CrudService } from '../shared/crud.service';
+import { CrudService } from '../shared/crud/crud.service';
 
 @Injectable()
-export class ProduitMockService implements CrudService<Produit, number>{
+export class ProduitMockService implements CrudService{
 
   private PRODUITS: Produit[] = [];
 
