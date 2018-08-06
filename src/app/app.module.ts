@@ -3,11 +3,12 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
+import { ChartModule } from 'angular2-chartjs';
 
 
 import { AppComponent } from './app.component';
-import {ProduitComponent} from './produit/produit.component';
-import {ProduitMockService} from './produit/produit.mock.service';
+import { ProduitComponent } from './produit/produit.component';
+import { ProduitMockService } from './produit/produit.mock.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { ContentComponent } from './content/content.component';
@@ -20,6 +21,7 @@ import { AppService } from './app.service';
 import { XhrInterceptor } from './xhr.interceptor';
 import { UserComponent } from './user/user.component';
 import { CrudComponent } from './shared/crud/crud.component';
+import { DataDescService } from './shared/data.desc.service';
 
 @NgModule({
   declarations: [
@@ -32,17 +34,18 @@ import { CrudComponent } from './shared/crud/crud.component';
     LoginComponent,
     HomeComponent,
     UserComponent,
-    CrudComponent
+    CrudComponent,
   ],
   imports: [
-    BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule
+    BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule, ChartModule
   ],
   providers: [
     ProduitMockService,
     ProduitService,
     AppService,
     { provide: HTTP_INTERCEPTORS, useClass: XhrInterceptor, multi: true},
-    CookieService
+    CookieService,
+    DataDescService
   ],
   bootstrap: [AppComponent]
 })

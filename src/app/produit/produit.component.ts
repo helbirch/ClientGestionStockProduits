@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import {ProduitMockService} from './produit.mock.service';
 import {Produit} from '../shared/produit';
 import { Column } from '../shared/column.model';
+import { DataDescService } from '../shared/data.desc.service';
 
 @Component({
   selector: 'app-produit',
@@ -21,7 +22,10 @@ export class ProduitComponent implements OnInit{
 
     dataDesc: Column[];
 
-    constructor(private produitService: ProduitMockService, private route: ActivatedRoute, private fb: FormBuilder){
+    constructor(private produitService: ProduitMockService,
+      private route: ActivatedRoute,
+      private fb: FormBuilder,
+      private dataDescService: DataDescService){
 
     }
 
@@ -33,11 +37,6 @@ export class ProduitComponent implements OnInit{
         prixUnitaire: ''
       });
 
-      this.dataDesc = [
-        new Column('id','ID','number',true,[]),
-        new Column('ref','Référence','text',false,[]),
-        new Column('quantite','Quantité','number',false,[]),
-        new Column('prixUnitaire','Prix Unitaire','number',false,[])
-      ];
+      this.dataDesc = this.dataDescService.getProduitDataDesc();
     }
 }
