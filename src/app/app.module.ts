@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { ChartModule } from 'angular2-chartjs';
@@ -37,7 +37,7 @@ import { DataDescService } from './shared/data.desc.service';
     CrudComponent,
   ],
   imports: [
-    BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule, ChartModule
+    BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule, ChartModule, FormsModule
   ],
   providers: [
     ProduitMockService,

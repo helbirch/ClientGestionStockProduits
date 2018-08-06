@@ -12,7 +12,7 @@ import { Column } from '../shared/column.model';
 })
 export class DashboardComponent implements OnInit {
 
-  columnName: 'quantite';
+  selectedColumnName = 'prixUnitaire';
   data = {
   labels: [],
   datasets: []
@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
   private dataDescService: DataDescService) { }
 
   ngOnInit() {
-    this.produitDataDesc = this.dataDescService.getProduitDataDesc();
+    this.produitDataDesc = this.dataDescService.getProduitDataDesc().filter(item => item.dataType === 'number' && !item.readonly);
 
     this.buildData();
   }
@@ -37,16 +37,19 @@ export class DashboardComponent implements OnInit {
       list.forEach(produit => this.data.labels.push(produit.ref));
 
       this.data.datasets = [];
-      const columnName = 'quantite';
-      switch(columnName){
-        case 'quantite':
-          const datasetsItem = {
-            label: 'Quantité',
-            data: []
-          };
-          list.forEach(produit => datasetsItem.data.push(produit['quantite']));
-          this.data.datasets.push(datasetsItem);
+
+      const selectColumn = this.produitDataDesc.find(item => item.columnName === this.selectedColumnName);
+
+      if(selectColumn){
+        const datasetsItem = {
+          label: selectColumn.columnRef,
+          data: []
         };
+
+        list.forEach(produit => datasetsItem.data.push(produit[selectColumn.columnName]));
+        this.data.datasets.push(datasetsItem);
+      }
+
     });
 
 

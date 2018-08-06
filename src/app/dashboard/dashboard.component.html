@@ -6,8 +6,8 @@
     <div class="card">
       <div class="card-header bg-info text-white">
         Produits
-        <select >
-          <option [ngValue]="column.columnName" *ngFor="let column of produitDataDesc | filter: dataType : 'number' ">{{column.columnRef}}</option>
+        <select [(ngModel)]="selectedColumnName">
+          <option [ngValue]="column.columnName" *ngFor="let column of produitDataDesc">{{column.columnRef}}</option>
         </select>
       </div>
       <div class="card-body">
