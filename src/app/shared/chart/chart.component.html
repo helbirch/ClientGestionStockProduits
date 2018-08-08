@@ -1,0 +1,14 @@
+<div class="card">
+  <div class="card-header bg-info text-white">
+    {{title}}
+    <div class="pull-right form-group">
+      <select class="form-control" [(ngModel)]="selectedColumnName">
+        <option value="">Tous</option>
+        <option [ngValue]="column.columnName" *ngFor="let column of myDataDescList">{{column.columnRef}}</option>
+      </select>
+    </div>
+  </div>
+  <div class="card-body">
+    <chart #myChart [type]="type" [data]="data" [options]="options"></chart>
+  </div>
+</div>

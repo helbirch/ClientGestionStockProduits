@@ -1,10 +1,10 @@
 
 export class Column{
   constructor(
-    columnName?: string,
-    columnRef?: string,
-    dataType?: string,
-    readonly?: boolean,
-    messages?: any
+    public columnName?: string,
+    public columnRef?: string,
+    public dataType?: string,
+    public readonly?: boolean,
+    public messages?: any
   ){}
 }

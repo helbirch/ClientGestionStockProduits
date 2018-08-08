@@ -22,6 +22,7 @@ import { XhrInterceptor } from './xhr.interceptor';
 import { UserComponent } from './user/user.component';
 import { CrudComponent } from './shared/crud/crud.component';
 import { DataDescService } from './shared/data.desc.service';
+import { ChartComponent } from './shared/chart/chart.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { DataDescService } from './shared/data.desc.service';
     HomeComponent,
     UserComponent,
     CrudComponent,
+    ChartComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule, ChartModule, FormsModule
