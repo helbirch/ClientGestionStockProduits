@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { FormGroup} from '@angular/forms';
 
 import { CrudService } from './crud.service';
 import { Column } from '../column.model';
@@ -37,63 +37,14 @@ export class CrudComponent implements OnInit {
 
   keys = [];
 
-  constructor(private fb: FormBuilder){
-    this.createForm();
+  crudType = 'simple';
+
+
+
+  constructor(){
   }
 
   ngOnInit(){
-    this.initData();
-  }
-
-  createForm(){
-    if(this.initCrudForm){
-      this.crudForm = this.initCrudForm;
-    } else {
-      this.crudForm = this.fb.group({});
-    }
-  }
-
-  loadData(){
-    this.service.getAll().subscribe(
-      data => {this.data = data},
-      error => { console.log('An error was occured.')},
-      () => { console.log('loading data was done.')}
-    );
-  }
-
-  add(){
-    const p = this.crudForm.value;
-    this.service.add(p).subscribe(
-      res => {
-        this.initData();
-        this.loadData();
-      }
-    );
-  }
-
-  update(){
-    this.service.update(this.selectedItem)
-    .subscribe(
-      res => {
-        this.initData();
-        this.loadData();
-      }
-    );
-  }
-
-  initData(){
-    this.selectedItem = this.initItem;
-    this.createForm();
-  }
-
-  delete(){
-    this.service.delete(this.selectedItem.id).
-    subscribe(
-      res =>{
-        this.selectedItem = this.initItem;
-        this.loadData();
-      }
-    );
   }
 
 }

@@ -23,6 +23,8 @@ import { UserComponent } from './user/user.component';
 import { CrudComponent } from './shared/crud/crud.component';
 import { DataDescService } from './shared/data.desc.service';
 import { ChartComponent } from './shared/chart/chart.component';
+import { UploadComponent } from './shared/crud/upload/upload.component';
+import { SimpleComponent } from './shared/crud/simple/simple.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,9 @@ import { ChartComponent } from './shared/chart/chart.component';
     HomeComponent,
     UserComponent,
     CrudComponent,
-    ChartComponent
+    ChartComponent,
+    UploadComponent,
+    SimpleComponent
   ],
   imports: [
     BrowserModule, AppRoutingModule, ReactiveFormsModule, HttpClientModule, ChartModule, FormsModule

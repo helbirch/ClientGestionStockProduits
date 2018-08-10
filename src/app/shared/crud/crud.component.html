@@ -1,79 +1,32 @@
 <ng-container *ngIf="data; else loading">
-  <h3>{{title}}</h3>
+  <div class="myVerticalSpace">
+    <h3>{{title}}</h3>
+  </div>
   <div class="container">
-    <div class="row">
-        <div class="col-lg-7">
-          <table class="table table-hover">
-            <thead>
-              <tr>
-                <th *ngFor="let desc of dataDesc">
-                  {{desc.columnRef}}
-                </th>
-                <th>
-                  <button class="btn btn-outline-primary btn-sm" (click)="operation = 'add'; initData();">ADD</button>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of data">
-                <td *ngFor="let desc of dataDesc">
-                  {{item[desc.columnName]}}
-                </td>
-                <td>
-                  <button class="btn btn-sm btn-outline-primary" (click)="operation = 'edit'; selectedItem = item;">Edit</button>
-                  <button class="btn btn-sm btn-outline-danger" (click)="operation = 'remove'; selectedItem = item;">Remove</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="col-lg-5">
-          <div class="card">
-            <div class="card-header bg-info text-white">
-              {{operation == 'add' ? 'Ajouter' :
-                operation == 'edit' ? 'Modifier' :
-                operation == 'remove' ? 'Supprimer' : ''}}
-            </div>
-            <div class="card-body">
-              <div *ngIf="operation == 'add' || operation == 'edit'">
-              <form [formGroup]="crudForm">
-                <div *ngFor="let desc of dataDesc">
-                  <div class="form-group" *ngIf="!desc.readonly" [ngSwitch]="desc.dataType">
-                    <label>{{desc.columnRef}}:</label>
-                    <input *ngSwitchCase="'text'" type="text"
-                      class="form-control"
-                      formControlName="{{desc.columnName}}"
-                      [(ngModel)]="selectedItem[desc.columnName]"
-                    />
-                    <input *ngSwitchCase="'number'" type="number"
-                      class="form-control"
-                      formControlName="{{desc.columnName}}"
-                      [(ngModel)]="selectedItem[desc.columnName]"
-                    />
-                  </div>
-                </div>
-                  <button class="btn btn-success" [disabled]="crudForm.prestine || crudForm.invalid"
-                  (click)="operation == 'add' ? add() : update()">
-                      {{ operation == 'add' ? 'Ajouter' : operation == 'edit' ? 'Modifier' : ''}}
-                  </button>
-
-                </form>
-              </div>
-              <div *ngIf="operation == 'remove'">
-                <p class="card-title">
-                  ID: {{selectedItem.id}}
-                </p>
-                <p>
-                  Voulez-vous supprimer cet élément?
-                </p>
-                <button class="btn btn-success" [disabled]="!selectedItem.id" (click)="delete()">Confirmer</button>
-              </div>
-
-            </div>
-            <div class="card-footer">
-
-            </div>
-          </div>
+    <div>
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link" href="" data-toggle="collapse" (click)="crudType = 'simple';" [ngClass]="{active: crudType == 'simple'}">Simple</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="" data-toggle="collapse" (click)="crudType = 'upload';" [ngClass]="{active: crudType == 'upload'}">Importer fichier</a>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <div *ngIf="crudType == 'simple'">
+        <app-simple
+        [initItem]="initItem"
+        [initCrudForm]="initCrudForm"
+        [data]="data"
+        [service]="service"
+        [dataDesc]="dataDesc"
+        ></app-simple>
+      </div>
+      <div *ngIf="crudType == 'upload'">
+        <app-upload
+          [dataDesc]="dataDesc"
+        ></app-upload>
       </div>
     </div>
   </div>
