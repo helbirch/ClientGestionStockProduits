@@ -16,11 +16,18 @@ export class UploadComponent implements OnInit {
 
   bindingArray: any[] = [];
 
+  currentStep: number = 1;
+
+  selectedStep: number = 1;
+
+  fileName: string = '';
+
   @ViewChild('fileimportInput') fileimportInput: any;
 
   constructor() { }
 
   ngOnInit() {
+
   }
 
   isCSVFile(file: any){
@@ -81,11 +88,15 @@ export class UploadComponent implements OnInit {
     this.fileimportInput.nativeElement.value = "";
     this.csvRecords = [];
     this.bindingArray = [];
+    this.currentStep = 1;
+    this.fileName = '';
   }
 
   fileChangelistener($event: any){
     let text = [];
     let files = $event.srcElement.files;
+
+    this.fileName = files[0].name;
 
     if(this.isCSVFile(files[0])){
       let input = $event.target;
@@ -100,7 +111,7 @@ export class UploadComponent implements OnInit {
         this.bindingArray = this.getBindingArray(headersRow);
 
         this.csvRecords = this.getDataRecordsFromCSVFile(csvRecordsArray, headersRow.length);
-        console.log(this.csvRecords);
+        this.currentStep++;
       };
 
       reader.onerror = () => alert('Unable to read '+ input.files[0]);

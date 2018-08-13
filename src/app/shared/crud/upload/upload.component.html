@@ -1,23 +1,51 @@
 <div class="myVerticalSpace">
 </div>
-<div>
-  <input type="file" #fileimportInput name="File Upload" id="txtFileUpload" (change)="fileChangelistener($event)" accept=".csv" />
+
+<div class="custom-file">
+  <input type="file"  id="customFile" #fileimportInput (change)="fileChangelistener($event)" accept=".csv">
+  <label class="custom-file-label" for="customFile">{{fileName ? fileName : 'Choisissez un fichier!'}}</label>
+</div>
+<div class="checkout-wrap">
+  <ul class="checkout-bar">
+    <li [ngClass]="{active: currentStep == 1, visited: currentStep>1}" (click)="selectedStep = 1;">Importer un fichier</li>
+    <li [ngClass]="{active: currentStep == 2, visited: currentStep>2}" (click)="selectedStep = 2;">
+      Envoyer
+      <a href="" data-toggle="collapse" (click)="currentStep=3;" [ngClass]="{adisabled: currentStep != 2}"><i class="fa fa-caret-square-o-right fa-lg" aria-hidden="true"></i></a>
+    </li>
+    <li [ngClass]="{active: currentStep == 3, visited: currentStep>3}" (click)="selectedStep = 3;">Récupérer les données</li>
+  </ul>
 </div>
 <div>
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th *ngFor="let desc of dataDesc">
-          {{desc.columnRef}}
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let item of csvRecords">
-        <td *ngFor="let desc of dataDesc">
-          {{item[desc.columnName]}}
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div [ngSwitch]="selectedStep">
+    <div *ngSwitchCase="1" >
+      <div *ngIf="csvRecords.length>0; then dataUpload; else noDataupload"></div>
+    </div>
+    <div *ngSwitchCase="2">
+      résult 2
+    </div>
+    <div *ngSwitchCase="3">
+      résultat 3
+    </div>
+  </div>
+  <ng-template #dataUpload>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th *ngFor="let desc of dataDesc">
+            {{desc.columnRef}}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of csvRecords">
+          <td *ngFor="let desc of dataDesc">
+            {{item[desc.columnName]}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </ng-template>
+  <ng-template #noDataupload>
+      Aucune donnée à afficher.
+  </ng-template>
 </div>
